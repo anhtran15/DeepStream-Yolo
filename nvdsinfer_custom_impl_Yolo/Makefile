@@ -37,7 +37,7 @@ CC:= g++
 NVCC:=/usr/local/cuda-$(CUDA_VER)/bin/nvcc
 
 CFLAGS:= -Wall -std=c++11 -shared -fPIC -Wno-error=deprecated-declarations
-CFLAGS+= -I/opt/nvidia/deepstream/deepstream/sources/includes -I/usr/local/cuda-$(CUDA_VER)/include
+CFLAGS+= -I/opt/nvidia/deepstream/deepstream-6.0/sources/includes -I/usr/local/cuda-$(CUDA_VER)/include -I/home/tma/DATA/kientran/deepstream_package/TensorRT-8.0.1.6/targets/x86_64-linux-gnu/include/
 
 ifeq ($(OPENCV), 1)
 	COMMON= -DOPENCV
@@ -46,7 +46,7 @@ ifeq ($(OPENCV), 1)
 endif
 
 LIBS+= -lnvinfer_plugin -lnvinfer -lnvparsers -L/usr/local/cuda-$(CUDA_VER)/lib64 -lcudart -lcublas -lstdc++fs
-LFLAGS:= -shared -Wl,--start-group $(LIBS) -Wl,--end-group
+LFLAGS:= -L/home/tma/DATA/kientran/deepstream_package/TensorRT-8.0.1.6/targets/x86_64-linux-gnu/lib/ -shared -Wl,--start-group $(LIBS) -Wl,--end-group
 
 INCS:= $(wildcard *.h)
 
